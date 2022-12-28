@@ -1,0 +1,17 @@
+{
+  "name": "telegramnot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "node-telegram-bot-api": "^0.60.0",
+    "request": "^2.88.2"
+  }
+}
