@@ -11,12 +11,29 @@ var showCount = 20; //展示的条数
 /*配置结束*/
 
 
-
+var amount;
 var bot = new TelegramBot(token, {polling: true});
 bot.on('message', (msg) => { 
-	if (msg.text%1!=0) {
-		return
+	amount = 0;
+	var textarray = [];
+	if (msg.text.search("u")!=-1) {
+		amount = parseFloat(msg.text.split("u")[0])
+		textarray = msg.text.split("u");
 	}
+	if (msg.text.search("U")!=-1) {
+		amount = parseFloat(msg.text.split("U")[0])
+		textarray = msg.text.split("U");
+	}
+	if (amount%1!=0 || amount==0 || textarray[1]!="") {
+		return
+	}else{
+		main(msg)
+	}
+	
+});
+
+
+function main(msg) {
 	request({
 		url: 'https://www.okx.com/v3/c2c/tradingOrders/books?quoteCurrency=cny&baseCurrency=usdt&side=sell&paymentMethod=bank',
 	}, (error, response, body) => {
@@ -28,8 +45,8 @@ bot.on('message', (msg) => {
 				sendvalue = `${sendvalue}${element.nickName}  ${element.price}\n`
 				allprice+= parseFloat(element.price)
 			}
-			sendvalue =`${sendvalue}\n实时价格：${msg.text} USDT * ${(allprice/showCount)} = ${(parseFloat(msg.text)*(allprice/showCount)).toFixed(2)}`
+			sendvalue =`${sendvalue}\n实时价格：${amount} USDT * ${(allprice/showCount).toFixed(5)} = ${(amount*(allprice/showCount)).toFixed(2)}`
 			bot.sendMessage(msg.chat.id,sendvalue );	
 		}
 	})
-});
+}
