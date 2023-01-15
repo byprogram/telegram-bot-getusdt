@@ -1,7 +1,7 @@
 # telegram-bot-getusdt
 可以获取实时usdt价格的机器人
 ## 实时预览
-机器人：[@exchange321_bot](https://t.me/exchange321_bot)
+机器人：[@usdtprice321_bot](https://t.me/usdtprice321_bot)
 ## 使用方法
 - 安装node.js和mysql
 ``` javascript
